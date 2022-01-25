@@ -8,7 +8,7 @@ The website is built using a [dataset](https://www.kaggle.com/swapnilbhange/aver
 
 ### 1. Running the backend
 To run the backend you need Docker installed to run a MongoDB image. To run teh docker image use `docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo`
-this command will keep the saved documents after you close the image so you can keep the destination after you add them. to run the .NET Core api simply hit F5 in the project. the API run on https://localhost:7167/ . The API is ocnfigured to allow CORS from https://localhost:8080/ so that the front-end part can reach the api.
+this command will keep the saved documents after you close the image so you can keep the destination after you add them. to run the .NET Core api simply hit F5 in the project. the API runs at https://localhost:7167/ . The API is ocnfigured to allow CORS from https://localhost:8080/ so that the front-end part can reach the api.
 ### 2. running the front end
 To run the front-end portion of the app you need to `cd frontend` and run `grid some develop`.
 
@@ -17,4 +17,5 @@ To run the front-end portion of the app you need to `cd frontend` and run `grid 
 ## To Do List
 1. Adding custom image per location using google photo places api
 2. Polishing UI
-3. In case of a lot of free time add recommendation based on previous locations visited using data analysis
+3. Adding user authentication using firebase and deploying the website
+4. Add recommendation based on previous locations visited using data analysis
