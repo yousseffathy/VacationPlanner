@@ -14,18 +14,18 @@ namespace Vacation.Controllers{
             this.PlannedRepository = PlannedRepository;
         }
         [HttpGet]
-        public IEnumerable<PlannedVacation> GetPlannedVacations(){
-            var plannedVacations = PlannedRepository.GetPlannedVacations();
+        public async Task<IEnumerable<PlannedVacation>> GetPlannedVacationsAsync(){
+            var plannedVacations = await PlannedRepository.GetPlannedVacationsAsync();
             return plannedVacations;
         }
         [HttpGet("{id}")]
-        public PlannedVacation GetPlannedVacation(Guid id){
-            var plannedVacation = PlannedRepository.GetPlannedVacation(id);
+        public async Task<PlannedVacation> GetPlannedVacationAsync(Guid id){
+            var plannedVacation = await PlannedRepository.GetPlannedVacationAsync(id);
             return plannedVacation;
         }
         [EnableCors("Policy")]
         [HttpPost]
-        public ActionResult<CreatePlannedVacationDto> CreatePlannedVacation(CreatePlannedVacationDto vacationDto){
+        public async Task<ActionResult<CreatePlannedVacationDto>> CreatePlannedVacationAsync(CreatePlannedVacationDto vacationDto){
             PlannedVacation vacation = new(){
                 id = Guid.NewGuid(),
                 City = vacationDto.City,
@@ -34,13 +34,13 @@ namespace Vacation.Controllers{
                 Start = vacationDto.Start,
                 End = vacationDto.End
             };
-            PlannedRepository.CreatePlannedVacation(vacation);
-            return CreatedAtAction(nameof(GetPlannedVacations), new {id = vacation.id}, vacation);
+            await PlannedRepository.CreatePlannedVacationAsync(vacation);
+            return CreatedAtAction(nameof(GetPlannedVacationsAsync), new {id = vacation.id}, vacation);
         }
         [EnableCors("Policy")]
         [HttpPut("{id}")]
-        public ActionResult UpdatePlannedVacation(Guid id, UpdatePlannedVacationDto vacationDto){
-            var existingPlannedVacation = PlannedRepository.GetPlannedVacation(id);
+        public async Task<ActionResult> UpdatePlannedVacationAsync(Guid id, UpdatePlannedVacationDto vacationDto){
+            var existingPlannedVacation = await PlannedRepository.GetPlannedVacationAsync(id);
             if (existingPlannedVacation is null){
                 return NotFound();
             }
@@ -51,17 +51,17 @@ namespace Vacation.Controllers{
                 Start = vacationDto.Start,
                 End = vacationDto.End
             };
-            PlannedRepository.UpdatePlannedVacation(updatedVacation);
+            await PlannedRepository.UpdatePlannedVacationAsync(updatedVacation);
             return NoContent();
         }
         [EnableCors("Policy")]
         [HttpDelete("{id}")]
-        public ActionResult DelePlannedVacation(Guid id){
-            var existingPlannedVacation = PlannedRepository.GetPlannedVacation(id);
+        public async Task<ActionResult> DelePlannedVacationAsync(Guid id){
+            var existingPlannedVacation = PlannedRepository.GetPlannedVacationAsync(id);
             if (existingPlannedVacation is null){
                 return NotFound();
             }
-            PlannedRepository.DeletePlannedVacation(id);
+            await PlannedRepository.DeletePlannedVacationAsync(id);
             return NoContent();
         }
     }

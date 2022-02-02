@@ -14,23 +14,23 @@ namespace Vacation.Repositories{
             destinationsCollection = database.GetCollection<Destination>(collectionName);
         }
 
-        public void CreateDestination(Destination destination)
+        public async Task CreateDestinationAsync(Destination destination)
         {
-            destinationsCollection.InsertOne(destination);
+            await destinationsCollection.InsertOneAsync(destination);
         }
 
-        public IEnumerable<Destination> GetDestinations()
+        public async Task<IEnumerable<Destination>> GetDestinationsAsync()
         {
-            return destinationsCollection.Find(new BsonDocument()).ToList();
+            return await destinationsCollection.Find(new BsonDocument()).ToListAsync();
         }
 
-        public IEnumerable<Destination> GetFilteredDestinations(string month, decimal min, decimal max)
+        public async Task<IEnumerable<Destination>> GetFilteredDestinationsAsync(string month, decimal min, decimal max)
         {
             var predicate = new DynamicFilterBuilder<Destination>()
             .And(b => b.And(month, FilterOperator.GreaterThanOrEqual, min))
             .And(b => b.And(month, FilterOperator.LessThanOrEqual, max))
             .Build();
-            return destinationsCollection.Find(predicate).ToList();
+            return await destinationsCollection.Find(predicate).ToListAsync();
 
         }
     }

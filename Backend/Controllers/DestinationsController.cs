@@ -15,17 +15,17 @@ namespace Vacation.Controllers{
         }
         [EnableCors("Policy")]
         [HttpGet]
-        public IEnumerable<Destination> GetDestinations(){
-            var destinations = Destinationrepository.GetDestinations();
+        public async Task<IEnumerable<Destination>> GetDestinationsAsync(){
+            var destinations = await Destinationrepository.GetDestinationsAsync();
             return destinations;
         }
         [HttpGet("filtered")]
-        public IEnumerable<Destination> GetDestination(string month, decimal min, decimal max){
-            var destinations = Destinationrepository.GetFilteredDestinations(month, min, max);
+        public async Task<IEnumerable<Destination> >GetDestinationAsync(string month, decimal min, decimal max){
+            var destinations = await Destinationrepository.GetFilteredDestinationsAsync(month, min, max);
             return destinations;
         }
         [HttpPost]
-        public ActionResult<Destination> CreateDestination(CreateDestinationDto destination){
+        public async Task<ActionResult<Destination>> CreateDestinationAsync(CreateDestinationDto destination){
             Destination newDestination = new(){
                 id = Guid.NewGuid(),
                 City = destination.City,
@@ -44,8 +44,8 @@ namespace Vacation.Controllers{
                 Nov = destination.Nov,
                 Dec = destination.Dec,
             };
-            Destinationrepository.CreateDestination(newDestination);
-            return CreatedAtAction(nameof(GetDestinations), new {city = destination.City}, destination);
+            await Destinationrepository.CreateDestinationAsync(newDestination);
+            return CreatedAtAction(nameof(GetDestinationsAsync), new {city = destination.City}, destination);
         }
     }
 }

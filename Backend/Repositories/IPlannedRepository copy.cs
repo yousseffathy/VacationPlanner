@@ -2,13 +2,13 @@ using Vacation.Entities;
 
 namespace Vacation.Repositories{
     public interface IPlannedRepository{
-        IEnumerable<PlannedVacation> GetPlannedVacations();
+        Task<IEnumerable<PlannedVacation>> GetPlannedVacationsAsync();
 
-        PlannedVacation GetPlannedVacation(Guid id);
+        Task<PlannedVacation> GetPlannedVacationAsync(Guid id);
 
-        void CreatePlannedVacation(PlannedVacation vacation);
+        Task CreatePlannedVacationAsync(PlannedVacation vacation);
 
-        void UpdatePlannedVacation(PlannedVacation vacation);
-        void DeletePlannedVacation(Guid id);
+        Task UpdatePlannedVacationAsync(PlannedVacation vacation);
+        Task DeletePlannedVacationAsync(Guid id);
     }
 }

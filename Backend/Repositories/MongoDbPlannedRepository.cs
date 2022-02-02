@@ -12,33 +12,33 @@ namespace Vacation.Repositories{
             IMongoDatabase database = mongoClient.GetDatabase(databaseName);
             plannedVacationCollection = database.GetCollection<PlannedVacation>(collectionName);
         }
-        public void CreatePlannedVacation(PlannedVacation vacation)
+        public async Task CreatePlannedVacationAsync(PlannedVacation vacation)
         {
-            plannedVacationCollection.InsertOne(vacation);
+            await plannedVacationCollection.InsertOneAsync(vacation);
         }
 
-        public void DeletePlannedVacation(Guid id)
-        {
-            var filter = Builders<PlannedVacation>.Filter.Eq(vacation => vacation.id, id);
-            plannedVacationCollection.DeleteOne(filter);
-
-        }
-
-        public PlannedVacation GetPlannedVacation(Guid id)
+        public async Task DeletePlannedVacationAsync(Guid id)
         {
             var filter = Builders<PlannedVacation>.Filter.Eq(vacation => vacation.id, id);
-            return plannedVacationCollection.Find(filter).SingleOrDefault();
+            await plannedVacationCollection.DeleteOneAsync(filter);
+
         }
 
-        public IEnumerable<PlannedVacation> GetPlannedVacations()
+        public async Task<PlannedVacation> GetPlannedVacationAsync(Guid id)
         {
-            return plannedVacationCollection.Find(new BsonDocument()).ToList();
+            var filter = Builders<PlannedVacation>.Filter.Eq(vacation => vacation.id, id);
+            return await plannedVacationCollection.Find(filter).SingleOrDefaultAsync();
         }
 
-        public void UpdatePlannedVacation(PlannedVacation vacation)
+        public async Task<IEnumerable<PlannedVacation>> GetPlannedVacationsAsync()
+        {
+            return await plannedVacationCollection.Find(new BsonDocument()).ToListAsync();
+        }
+
+        public async Task UpdatePlannedVacationAsync(PlannedVacation vacation)
         {
             var filter = Builders<PlannedVacation>.Filter.Eq(existingVacation => existingVacation.id, vacation.id);
-            plannedVacationCollection.ReplaceOne(filter, vacation);
+            await plannedVacationCollection.ReplaceOneAsync(filter, vacation);
 
         }
     }

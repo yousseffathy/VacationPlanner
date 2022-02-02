@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\youss\\Desktop\\VacationRecommendation\\Backend\\Vacation.csproj": {}
+    "C:\\Users\\youss\\Desktop\\VacationPlanner\\Backend\\Vacation.csproj": {}
   },
   "projects": {
-    "C:\\Users\\youss\\Desktop\\VacationRecommendation\\Backend\\Vacation.csproj": {
+    "C:\\Users\\youss\\Desktop\\VacationPlanner\\Backend\\Vacation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\youss\\Desktop\\VacationRecommendation\\Backend\\Vacation.csproj",
+        "projectUniqueName": "C:\\Users\\youss\\Desktop\\VacationPlanner\\Backend\\Vacation.csproj",
         "projectName": "Vacation",
-        "projectPath": "C:\\Users\\youss\\Desktop\\VacationRecommendation\\Backend\\Vacation.csproj",
+        "projectPath": "C:\\Users\\youss\\Desktop\\VacationPlanner\\Backend\\Vacation.csproj",
         "packagesPath": "C:\\Users\\youss\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\youss\\Desktop\\VacationRecommendation\\Backend\\obj\\",
+        "outputPath": "C:\\Users\\youss\\Desktop\\VacationPlanner\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\youss\\AppData\\Roaming\\NuGet\\NuGet.Config",

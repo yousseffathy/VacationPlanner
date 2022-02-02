@@ -2,8 +2,8 @@ using Vacation.Entities;
 
 namespace Vacation.Repositories{
     public interface IDestinationsRepository{
-        IEnumerable<Destination> GetDestinations();
-        IEnumerable<Destination> GetFilteredDestinations(string month, decimal min, decimal max);
-        void CreateDestination(Destination destination);
+        Task<IEnumerable<Destination>> GetDestinationsAsync();
+        Task<IEnumerable<Destination>> GetFilteredDestinationsAsync(string month, decimal min, decimal max);
+        Task CreateDestinationAsync(Destination destination);
     }
 }
